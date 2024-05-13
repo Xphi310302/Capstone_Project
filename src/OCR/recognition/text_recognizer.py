@@ -31,10 +31,17 @@ class TextRecognizer():
             # second line: use the available weights in path model/vietocr_model
 
             # self.config = Cfg.load_config_from_name('vgg_seq2seq')
-            self.config = Cfg.load_config_from_file('model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg-seq2seq.yml')
-            # self.config['cnn']['pretrained'] = True                        # torchvision < 0.13
-            self.config['cnn']['weights'] = 'VGG19_BN_Weights.IMAGENET1K_V1' # torchvision >= 0.13
-            self.config['device'] = 'cpu' # or use 'cuda:0'
+            # self.config = Cfg.load_config_from_file('model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg-seq2seq.yml')
+            # # self.config['cnn']['pretrained'] = True                        # torchvision < 0.13
+            # self.config['cnn']['weights'] = 'VGG19_BN_Weights.IMAGENET1K_V1' # torchvision >= 0.13
+            # self.config['device'] = 'cuda:0' # cpu or use 'cuda:0'
+            # self.detector = Predictor(self.config)
+
+            self.config = Cfg.load_config_from_file('model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg-seq2seq_old.yml')
+            self.config['pretrain'] = 'model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg_seq2seq_old.pth'
+            self.config['weights'] = 'model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg_seq2seq_old.pth'
+            self.config['predictor']['beamsearch']=False
+            self.config['device'] = 'cuda:0'
             self.detector = Predictor(self.config)
 
     def recognize(self, img):

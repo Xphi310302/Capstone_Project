@@ -2,6 +2,11 @@ import os
 import sys
 from ultralytics import YOLO
 
+# import torch
+# import cv2
+# torch.cuda.set_device(0)
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(__dir__)
 sys.path.insert(0, os.path.abspath(os.path.join(__dir__, '..')))
@@ -24,7 +29,8 @@ class LayoutAnalyzer():
         else:
             LayoutAnalyzer.__instance__ = self
             self.model = YOLO('model/doc_model/yolov8_instance_segmentation/document_layout_analysis/v3/best.pt')
-
+            # print(device)
+            # self.model.to(device=device)
 
     def format_layout_result(self, layout_result):
         index_of_class = {0:'figure', 1:'list', 2:'table', 3:'text', 4:'title'}

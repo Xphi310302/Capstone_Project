@@ -55,15 +55,19 @@ class InfoExtracter():
         
         # preprocess image (~8s)
         image = preprocess_image(image)
-
+        preprocess_time = time.time() - start_time
+        print('preprocess_time:', preprocess_time)
         title = {'box':[], 'text':[]}
 
         # document layout analysis
+        start_layout_time = time.time()
         layout_document = self.layout_analyzer.predict(image)
+        layout_time = time.time() - start_layout_time
+        print('layout_time:', layout_time)
 
         # find template boxes
         title_boxes = layout_document['title']['box'].copy()
-
+     
         # find template title
         title_texts = []
         for box in title_boxes:
@@ -82,19 +86,27 @@ class InfoExtracter():
             template = json.load(file)
         template_image = cv2.imread(f"config/template/{form_name}.jpg")
 
+
         aligned = align_images(image, template_image, debug=False)
-
+        start_layout_time = time.time()
         layout_template = self.layout_analyzer.predict(aligned)
+        layout_time = time.time() - start_layout_time
+        print('layout_time_2:', layout_time)
 
+        start_det_reg_time = time.time()
         for loc in template:
             [x_t, y_t, x_b, y_b] = loc['box']
             roi = aligned[y_t:y_b, x_t:x_b]
             cropped_image = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
             ocr_text = self.find_text_in_big_box(cropped_image)
             loc['ocr_text'] = ocr_text
-
+        det_reg_time = time.time()
+        print('det_reg_time:', det_reg_time - start_det_reg_time)
+        
         table_question = []
         table_answer = []
+
+        
         for i, loc in enumerate(template):
             class_of_box = find_class_of_box(loc['box'], layout_template)
             if class_of_box == 'table':
@@ -106,7 +118,7 @@ class InfoExtracter():
             else:
                 if loc['class'] == 'answer':
                     loc['text'] = template[i-1]['text']
-        
+        print('table_time:', time.time() - det_reg_time)
         result = []
         for i, loc in enumerate(template):
             if loc['class'] != 'question':
