@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+
 }
 
 .image-container {
@@ -20,6 +21,7 @@ body {
   flex: 0 0 50%;
   /* Adjust the width as needed */
   position: relative;
+
 }
 
 .right-column {
@@ -90,4 +92,41 @@ input[type="file"]:focus,
 /* Style for the 'Choose File' button on hover */
 input[type="file"]:hover {
   background-color: #e0e0e0;
+}
+
+
+#displayContainer {
+  /* border: 2px solid #000; Black border with a width of 2px */
+  margin: 20px 0; /* Margin outside the container */
+  /* background-color: #f9f9f9; Light gray background color */
+  float: left;
+  min-height: 100px;
+  min-width: 200px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  overflow: auto; /* Add scroll if content overflows */
+}
+
+.field-container {
+  padding: 5px;
+  border-bottom: 2px solid #ccc; /* Light gray border for separation */
+}
+.fixed-text {
+  font-weight: bold; /* Bold text for labels */
+  color: #333; /* Dark text color */
+}
+
+#homeButton {
+  font-size: 80px;
+  border: none;
+  cursor: pointer;
+  background-color:#0a0a23;
+  color: #fff;
+}
+
+#createButton {
+  font-size: 80px;
+  border: none;
+  cursor: pointer;
+  background-color:#0a0a23;
+  color: #fff;
 }

@@ -47,15 +47,6 @@ tempImg.onload = function () {
 };
 tempImg.src = imgSrc;
 
-boxes = boxesTemp.map(data => ({
-  startX: data.box[2],
-  startY: data.box[3],
-  width: data.box[0] - data.box[2],
-  height: data.box[1] - data.box[3],
-  text: data.text || '', // Ensure text property exists or set it to an empty string
-  class: data.class
-}));
-
 // Adding an event listener to 'imageInput' element when a file is selected
 imageInput.addEventListener('change', function (event) {
   // delete Allboxes if there are any 
@@ -94,6 +85,17 @@ imageInput.addEventListener('change', function (event) {
     isSubmiting = false;
   }
 });
+
+
+
+boxes = boxesTemp.map(data => ({
+  startX: data.box[2],
+  startY: data.box[3],
+  width: data.box[0] - data.box[2],
+  height: data.box[1] - data.box[3],
+  text: data.text || '', // Ensure text property exists or set it to an empty string
+  class: data.class
+}));
 
 // Adding a mousedown event listener to the imageCanvas
 imageCanvas.addEventListener('mousedown', (e) => {
@@ -291,5 +293,15 @@ createButton.addEventListener('click', async () => {
   } else {
     createTable(jsonData);
   }
+});
+
+// JavaScript to handle button click and navigate to index.html
+document.getElementById('homeButton').addEventListener('click', function() {
+  window.location.href = '/'; // This navigates to index.html
+});
+
+// JavaScript to handle button click and navigate to index.html
+document.getElementById('extractButton').addEventListener('click', function() {
+window.location.href = '/extractingInfo'; // This navigates to index.html
 });
 

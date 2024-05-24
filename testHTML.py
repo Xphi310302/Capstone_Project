@@ -5,12 +5,13 @@ import json
 import imutils
 import mysql.connector
 from pydantic import BaseModel
-from fastapi import FastAPI, Depends, File, UploadFile, Form, Request
+from fastapi import FastAPI, Depends, File, UploadFile, Form, Request, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from src.table_creater import TableCreater
 from src.info_extracter import InfoExtracter
 from src.utils.utility import load_image, find_relative_position
+from fastapi.responses import JSONResponse
 
 with open("./config/doc_config.yaml", "r") as f:
     doc_config = yaml.safe_load(f)
@@ -184,3 +185,22 @@ async def insert_data(data: JSONData):
         return {"message": "Data inserted successfully"}
     except Exception as e:
         return {"message": f"Error inserting data: {str(e)}"}
+    
+    
+# Define the path to the mapping.json file
+json_file_path = "src/WEB/resources/script/extract_info/mapping.json" 
+# Fast api endpoint to retrieve mapping.json and return the json object using get
+@app.get("/get-mapping", response_class=JSONResponse)
+async def get_mapping():
+
+    try:
+        # Open and read the JSON file
+        with open(json_file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="JSON file not found")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Error decoding JSON file")
+    
+#Fasi api endpoint to go back to Homepage '/'

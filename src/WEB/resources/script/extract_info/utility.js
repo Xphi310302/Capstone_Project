@@ -15,12 +15,12 @@ function adjustInputElementsSize() {
 
   const buttons = document.querySelectorAll('input[type="file"], #updateButton');
   buttons.forEach(button => {
-    button.style.fontSize = `${scaleFactor * 14}px`; // Adjust button font size
-    button.style.padding = `${scaleFactor * 8}px ${scaleFactor * 16}px`; // Adjust button padding
+    button.style.fontSize = `${scaleFactor * 7}px`; // Adjust button font size 14
+    button.style.padding = `${scaleFactor * 4}px ${scaleFactor * 8}px`; // Adjust button padding 8
   });
 
   // Adjust padding for question and title buttonz
-  const button_class = document.querySelectorAll('#submitButton');
+  const button_class = document.querySelectorAll('#homeButton, #createButton, #submitButton');
   button_class.forEach(button => {
     button.style.fontSize = `${scaleFactor * 12}px`; // Adjust button font size
     button.style.padding = `${scaleFactor * 6}px ${scaleFactor * 13}px`; // Adjust button padding
@@ -99,9 +99,15 @@ function draw() {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
     ctx.fillRect(resizingBox.startX, resizingBox.startY, resizingBox.width, resizingBox.height);
   }
+
+  // Display the ocr results
   const boxesToSave = formatBoxesToSave(boxes);
   document.getElementById('templateDisplay').textContent = JSON.stringify(boxesToSave);
+
+ 
+
 }
+
 
 // Function to remove boxes with absolute height or width < 0.5
 function removeSmallBoxes() {
@@ -241,3 +247,5 @@ function updateTable(jsonData) {
     .then(data => alert(data.message))
     .catch(error => alert(error.message));
 }
+
+

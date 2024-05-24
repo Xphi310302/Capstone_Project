@@ -11,6 +11,9 @@ const submitButton = document.getElementById('submitButton');
 const textInput = document.getElementById('textInput');
 const updateButton = document.getElementById('updateButton');
 
+const container = document.getElementById('displayContainer');
+
+
 let img = new Image();
 let realImgSrc;
 let isSubmiting = true;
@@ -231,6 +234,9 @@ textInput.addEventListener('keypress', function (e) {
       textInput.style.display = 'none'; // Hide text input after saving text
       draw();
     }
+    // Display data
+    const jsonData = document.getElementById('templateDisplay').textContent;
+    displayField(jsonData);
   }
 });
 
@@ -240,6 +246,7 @@ updateButton.addEventListener('click', async () => {
     .filter(item => item.class === "title")
     .map(item => item.text);
 
+  
   const response = await fetch(`/confirm_and_create_table?table_name=${tableToUpdate}`, {
     method: 'POST'
   });
@@ -252,4 +259,5 @@ updateButton.addEventListener('click', async () => {
     alert(`Table "${tableToUpdate}" does not exist.`)
   }
 });
+
 

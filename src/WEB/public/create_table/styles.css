@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
 }
@@ -21,6 +22,7 @@ body {
   /* Adjust the width as needed */
   position: relative;
 }
+
 
 .right-column {
   flex: 0 0 45%;
@@ -142,7 +144,7 @@ input[type="file"],
 
 input[type="file"]:hover,
 #textInput:hover {
-  background-color: #f0f0f0;
+  background-color: #918a8a;
 }
 
 input[type="file"]:focus,
@@ -156,3 +158,32 @@ input[type="file"]:focus,
 input[type="file"]:hover {
   background-color: #e0e0e0;
 }
+
+#homeButton {
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  background-color:#0a0a23;
+  color: #fff;
+  /* margin-right: auto; Pushes the button to the left */
+}
+
+#extractButton {
+  font-size: 30px;
+  border: none;
+  cursor: pointer;
+  background-color:#0a0a23;
+  color: #fff;
+}
+
+.menuBar {
+  height: 50px;
+  /* display: flex; */
+  /* justify-content: space-between; Distribute items evenly along the main axis */
+  align-items: center; /* Center items vertically */
+  /* padding: 0 20px; Optional: Add padding for spacing */
+}
+
+
+
+

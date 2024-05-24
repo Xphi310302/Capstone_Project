@@ -4,27 +4,57 @@ function adjustInputElementsSize() {
   const canvasWidth = canvasRect.width;
   const canvasHeight = canvasRect.height;
 
-  // Calculate the scaled size for input elements
-  const scaleFactor = Math.min(canvasWidth, canvasHeight) / 400; // Adjust according to your requirements
+  // // Calculate the scaled size for input elements
+  // const scaleFactor = Math.min(canvasWidth, canvasHeight) / 400; // Adjust according to your requirements
 
-  const inputText = document.getElementById('textInput');
-  inputText.style.fontSize = `${scaleFactor * 16}px`; // Adjust font size based on canvas size
+  // const inputText = document.getElementById('textInput');
+  // inputText.style.fontSize = `${scaleFactor * 16}px`; // Adjust font size based on canvas size
 
-  const templateDisplay = document.getElementById('templateDisplay');
-  templateDisplay.style.fontSize = `${scaleFactor * 10}px`; // Adjust font size based on canvas size
+  // const templateDisplay = document.getElementById('templateDisplay');
+  // templateDisplay.style.fontSize = `${scaleFactor * 10}px`; // Adjust font size based on canvas size
 
-  const buttons = document.querySelectorAll('input[type="file"], #saveButton, #createButton');
-  buttons.forEach(button => {
-    button.style.fontSize = `${scaleFactor * 14}px`; // Adjust button font size
-    button.style.padding = `${scaleFactor * 8}px ${scaleFactor * 16}px`; // Adjust button padding
-  });
+  // const buttons = document.querySelectorAll('input[type="file"], #saveButton, #createButton');
+  // buttons.forEach(button => {
+  //   button.style.fontSize = `${scaleFactor * 14}px`; // Adjust button font size
+  //   button.style.padding = `${scaleFactor * 8}px ${scaleFactor * 16}px`; // Adjust button padding
+  // });
 
-  // Adjust padding for question and title buttonz
-  const button_class = document.querySelectorAll('#submitButton, #questionButton, #answerButton, #titleButton, #dateButton');
-  button_class.forEach(button => {
-    button.style.fontSize = `${scaleFactor * 12}px`; // Adjust button font size
-    button.style.padding = `${scaleFactor * 6}px ${scaleFactor * 13}px`; // Adjust button padding
-  });
+  // // Adjust padding for question and title buttonz
+  // const button_class = document.querySelectorAll('#submitButton, #questionButton, #answerButton, #titleButton, #dateButton');
+  // button_class.forEach(button => {
+  //   button.style.fontSize = `${scaleFactor * 12}px`; // Adjust button font size
+  //   button.style.padding = `${scaleFactor * 6}px ${scaleFactor * 13}px`; // Adjust button padding
+  // });
+
+  //Adjust for homeButton and extractButton
+  // Get references to the buttons
+  // const homeButton = document.getElementById('homeButton');
+  // const extractButton = document.getElementById('extractButton');
+  // const menuBar = document.getElementsByClassName('menuBar');
+  // // Apply styles using JavaScript
+  // homeButton.style.fontSize = `${scaleFactor * 12}px`;
+  // homeButton.style.border = 'none';
+  // homeButton.style.cursor = 'pointer';
+  // homeButton.style.backgroundColor = '#0a0a23';
+  // homeButton.style.color = '#fff';
+  // homeButton.style.marginRight = 'auto'; // Pushes the button to the left
+
+  // extractButton.style.fontSize = `${scaleFactor * 12}px`;
+  // extractButton.style.border = 'none';
+  // extractButton.style.cursor = 'pointer';
+  // extractButton.style.backgroundColor = '#0a0a23';
+  // extractButton.style.color = '#fff';
+}
+function drawImageScaled(img, ctx) {
+  var canvas = ctx.canvas ;
+  var hRatio = canvas.width  / img.width    ;
+  var vRatio =  canvas.height / img.height  ;
+  var ratio  = Math.min ( hRatio, vRatio );
+  var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+  var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  ctx.drawImage(img, 0,0, img.width, img.height,
+                     centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
 }
 
 function delareImage() {
@@ -38,14 +68,13 @@ function delareImage() {
   imageCanvas.width = img.width;
   imageCanvas.height = img.height;
 
-  adjustInputElementsSize(imageCanvas); // Call function to adjust input elements size
+  adjustInputElementsSize(); // Call function to adjust input elements size
 }
 
 function draw() {
   delareImage();
   ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
   ctx.drawImage(img, 0, 0, img.width, img.height);
-
   boxes.forEach((box, index) => {
     switch (box.class) {
       case 'title':
@@ -297,3 +326,4 @@ function createTable(jsonData) {
     .then(data => alert(data.message))
     .catch(error => alert(error.message));
 }
+
