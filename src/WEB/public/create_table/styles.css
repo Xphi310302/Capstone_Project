@@ -160,28 +160,24 @@ input[type="file"]:hover {
 }
 
 #homeButton {
-  font-size: 30px;
+  font-size: 80px;
   border: none;
   cursor: pointer;
   background-color:#0a0a23;
   color: #fff;
-  /* margin-right: auto; Pushes the button to the left */
 }
 
 #extractButton {
-  font-size: 30px;
+  font-size: 80px;
   border: none;
   cursor: pointer;
   background-color:#0a0a23;
   color: #fff;
 }
 
-.menuBar {
-  height: 50px;
-  /* display: flex; */
-  /* justify-content: space-between; Distribute items evenly along the main axis */
-  align-items: center; /* Center items vertically */
-  /* padding: 0 20px; Optional: Add padding for spacing */
+#menubar {
+  background-color:#3498db;
+  color: #fff;
 }
 
 

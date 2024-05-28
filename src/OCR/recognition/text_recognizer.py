@@ -2,12 +2,21 @@ import os
 import sys
 from src.OCR.recognition.tool.config import Cfg
 from src.OCR.recognition.tool.predictor import Predictor
+import torch
 
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(__dir__)
 sys.path.insert(0, os.path.abspath(os.path.join(__dir__, '../..')))
 
 os.environ["FLAGS_allocator_strategy"] = 'auto_growth'
+
+# Check torch available
+if torch.cuda.is_available():
+    device = 'cuda:0'
+    
+else:
+    device = 'cpu'
+print('Text recognition uses', device)
 
 class TextRecognizer():
     __instance__ = None
@@ -41,7 +50,7 @@ class TextRecognizer():
             self.config['pretrain'] = 'model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg_seq2seq_old.pth'
             self.config['weights'] = 'model/recognition_model/vi_vietocr_vgg19_seq2seq/vgg_seq2seq_old.pth'
             self.config['predictor']['beamsearch']=False
-            self.config['device'] = 'cuda:0'
+            self.config['device'] = device
             self.detector = Predictor(self.config)
 
     def recognize(self, img):

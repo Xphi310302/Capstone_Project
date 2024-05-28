@@ -34,7 +34,7 @@ function displayFields(boxes) {
     // Clear previous content
     container.innerHTML = '<h2>EXTRACTED INFORMATION</h2>';
 
-  boxes.forEach(async item => {
+    boxes.forEach(async item => {
       const fieldContainer = document.createElement('div');
       fieldContainer.className = 'field-container';
 

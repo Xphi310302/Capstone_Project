@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="menuBar" align="center">
+    <div id="menuBar" align="center">
         <button id="homeButton"><i class="fa-solid fa-house"></i> Home Page</button>
         <button id="extractButton"><i class="fa-solid fa-file-export"></i> Extract Info Page</button>
     </div>
@@ -42,7 +42,16 @@
             <input type="file" id="loadInput" accept=".json">
             <button id="saveButton"><i class="fa-solid fa-download"></i> Save Template</button>
 
-            <p id="templateDisplay" name="templateDisplay"></p>
+            <p id="templateDisplay" name="templateDisplay" style="display: none;"></p>
+            <h2 id="resultHeading">Fields Of Information</h2>
+            <div id="display-list">
+                <ul id="">
+                    <li id="titleList">Title</li>
+                    <li id ="questionList">Question</li>
+                    <li id="answerList">Answer</li>
+                    <li id="dateList">Date</li>
+                </ul>
+            </div>
             <button id="createButton"><i class="fa-solid fa-upload"></i> Create Table</button>
         </div>
     </div>
